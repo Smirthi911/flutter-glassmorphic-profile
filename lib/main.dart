@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ui_blocks/screens/custom_buttons.dart';
 import 'screens/glassmorphic_profile.dart';
+import 'screens/task_list_screen.dart'; // NEW import
 
 void main() {
   runApp(const UIBlocksApp());
@@ -48,13 +50,35 @@ class HomeScreen extends StatelessWidget {
               );
             },
           ),
-          // More cards can be added here later
+          _buildCard(
+            context,
+            title: 'Task List',
+            subtitle: 'Mock data task management UI',
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const TaskListScreen()),
+              );
+            },
+          ),
+          _buildCard(
+  context,
+  title: 'Custom Button Set',
+  subtitle: 'Stylish interactive buttons with animation',
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => const CustomButtonsScreen()),
+    );
+  },
+),
         ],
       ),
     );
   }
 
-  Widget _buildCard(BuildContext context, {
+  Widget _buildCard(
+    BuildContext context, {
     required String title,
     required String subtitle,
     required VoidCallback onTap,

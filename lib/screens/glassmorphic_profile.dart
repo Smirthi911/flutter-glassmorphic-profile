@@ -1,8 +1,17 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
-class GlassmorphicProfileScreen extends StatelessWidget {
+class GlassmorphicProfileScreen extends StatefulWidget {
   const GlassmorphicProfileScreen({super.key});
+
+  @override
+  State<GlassmorphicProfileScreen> createState() => _GlassmorphicProfileScreenState();
+}
+
+class _GlassmorphicProfileScreenState extends State<GlassmorphicProfileScreen> {
+  bool isHoveringEmail = false;
+  bool isHoveringPhone = false;
+  bool isHoveringLink = false;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +24,7 @@ class GlassmorphicProfileScreen extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          // Background Image from local assets
+          // Background Image
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
@@ -33,7 +42,7 @@ class GlassmorphicProfileScreen extends StatelessWidget {
                 filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                 child: Container(
                   width: 300,
-                  height: 400,
+                  height: 420,
                   decoration: BoxDecoration(
                     color: Colors.white.withAlpha(38),
                     borderRadius: BorderRadius.circular(24),
@@ -41,13 +50,13 @@ class GlassmorphicProfileScreen extends StatelessWidget {
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      CircleAvatar(
+                    children: [
+                      const CircleAvatar(
                         radius: 50,
                         backgroundImage: AssetImage('assets/girl.jpg'),
                       ),
-                      SizedBox(height: 20),
-                      Text(
+                      const SizedBox(height: 20),
+                      const Text(
                         'Smirthi',
                         style: TextStyle(
                           fontSize: 22,
@@ -55,23 +64,51 @@ class GlassmorphicProfileScreen extends StatelessWidget {
                           color: Colors.white,
                         ),
                       ),
-                      SizedBox(height: 8),
-                      Text(
+                      const SizedBox(height: 8),
+                      const Text(
                         'UI Designer',
                         style: TextStyle(
                           fontSize: 16,
                           color: Colors.white70,
                         ),
                       ),
-                      SizedBox(height: 30),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Icon(Icons.email, color: Colors.white70),
-                          Icon(Icons.phone, color: Colors.white70),
-                          Icon(Icons.link, color: Colors.white70),
-                        ],
-                      ),
+                      const SizedBox(height: 30),
+
+                      // Contact Icons with Hover
+                      // Contact Icons with Hover + Equal Alignment
+Padding(
+  padding: const EdgeInsets.symmetric(horizontal: 20),
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      Expanded(
+        child: _buildHoverIcon(
+          icon: Icons.email,
+          label: 'smith@mail.com',
+          isHovering: isHoveringEmail,
+          onHoverChange: (val) => setState(() => isHoveringEmail = val),
+        ),
+      ),
+      Expanded(
+        child: _buildHoverIcon(
+          icon: Icons.phone,
+          label: '9876532101',
+          isHovering: isHoveringPhone,
+          onHoverChange: (val) => setState(() => isHoveringPhone = val),
+        ),
+      ),
+      Expanded(
+        child: _buildHoverIcon(
+          icon: Icons.link,
+          label: 'smirthi.dev',
+          isHovering: isHoveringLink,
+          onHoverChange: (val) => setState(() => isHoveringLink = val),
+        ),
+      ),
+    ],
+  ),
+),
+
                     ],
                   ),
                 ),
@@ -82,4 +119,41 @@ class GlassmorphicProfileScreen extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildHoverIcon({
+  required IconData icon,
+  required String label,
+  required bool isHovering,
+  required Function(bool) onHoverChange,
+}) {
+  return MouseRegion(
+    onEnter: (_) => onHoverChange(true),
+    onExit: (_) => onHoverChange(false),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Icon(icon, color: Colors.white70),
+        const SizedBox(height: 6),
+        SizedBox(
+          height: 16,
+          child: AnimatedOpacity(
+            opacity: isHovering ? 1.0 : 0.0,
+            duration: const Duration(milliseconds: 200),
+            child: Text(
+              label,
+              style: const TextStyle(
+                fontSize: 12,
+                color: Colors.white,
+              ),
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis, // to keep width controlled
+              maxLines: 1,
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
 }
