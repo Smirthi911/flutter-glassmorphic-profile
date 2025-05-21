@@ -24,7 +24,7 @@ class _GlassmorphicProfileScreenState extends State<GlassmorphicProfileScreen> {
       ),
       body: Stack(
         children: [
-          // Background Image
+  
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
@@ -34,7 +34,7 @@ class _GlassmorphicProfileScreenState extends State<GlassmorphicProfileScreen> {
             ),
           ),
 
-          // Glassmorphic Card
+         
           Center(
             child: ClipRRect(
               borderRadius: BorderRadius.circular(24),
@@ -74,8 +74,6 @@ class _GlassmorphicProfileScreenState extends State<GlassmorphicProfileScreen> {
                       ),
                       const SizedBox(height: 30),
 
-                      // Contact Icons with Hover
-                      // Contact Icons with Hover + Equal Alignment
 Padding(
   padding: const EdgeInsets.symmetric(horizontal: 20),
   child: Row(
@@ -147,7 +145,7 @@ Padding(
                 color: Colors.white,
               ),
               textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis, // to keep width controlled
+              overflow: TextOverflow.ellipsis, 
               maxLines: 1,
             ),
           ),

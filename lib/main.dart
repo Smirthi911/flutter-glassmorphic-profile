@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ui_blocks/screens/custom_buttons.dart';
+import 'package:ui_blocks/screens/expansion_card.dart';
+import 'package:ui_blocks/screens/flip_card.dart';
 import 'screens/glassmorphic_profile.dart';
-import 'screens/task_list_screen.dart'; // NEW import
+import 'screens/task_list_screen.dart'; 
 
 void main() {
   runApp(const UIBlocksApp());
@@ -62,7 +64,7 @@ class HomeScreen extends StatelessWidget {
             },
           ),
           _buildCard(
-  context,
+            context,
   title: 'Custom Button Set',
   subtitle: 'Stylish interactive buttons with animation',
   onTap: () {
@@ -72,6 +74,30 @@ class HomeScreen extends StatelessWidget {
     );
   },
 ),
+_buildCard(
+  context,
+  title: 'Interactive Expansion Card',
+  subtitle: 'Tap to expand and see details',
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => const ExpansionCardScreen()),
+    );
+  },
+),
+_buildCard(
+  context,
+  title: 'Flip Card Animation',
+  subtitle: 'Tap to flip between front and back',
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => const FlipCardss()),
+    );
+  },
+),
+
+
         ],
       ),
     );

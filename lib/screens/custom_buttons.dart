@@ -24,7 +24,7 @@ class CustomButtonsScreen extends StatelessWidget {
   }
 }
 
-// Glassmorphic-style Button
+
 class GlassButton extends StatelessWidget {
   final String text;
   const GlassButton({super.key, required this.text});
@@ -39,15 +39,15 @@ class GlassButton extends StatelessWidget {
           onPressed: () {},
           style: TextButton.styleFrom(
             padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-            backgroundColor: Colors.white.withOpacity(0.2),
+            backgroundColor: Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
-              side: BorderSide(color: Colors.white.withOpacity(0.4)),
+              side: BorderSide(color: Colors.white),
             ),
           ),
           child: Text(
             text,
-            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            style: const TextStyle(color: Colors.deepOrange, fontWeight: FontWeight.bold),
           ),
         ),
       ),
@@ -55,7 +55,7 @@ class GlassButton extends StatelessWidget {
   }
 }
 
-// Glowing Button
+
 class GlowButton extends StatelessWidget {
   final String text;
   const GlowButton({super.key, required this.text});
@@ -66,7 +66,7 @@ class GlowButton extends StatelessWidget {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Colors.blueAccent.withOpacity(0.6),
+            color: Colors.blueAccent,
             blurRadius: 20,
             spreadRadius: 1,
           ),
@@ -86,7 +86,7 @@ class GlowButton extends StatelessWidget {
   }
 }
 
-// Gradient Border Button
+
 class GradientBorderButton extends StatelessWidget {
   final String text;
   const GradientBorderButton({super.key, required this.text});
