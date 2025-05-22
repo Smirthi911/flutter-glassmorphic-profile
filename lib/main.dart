@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ui_blocks/screens/custom_buttons.dart';
 import 'package:ui_blocks/screens/expansion_card.dart';
 import 'package:ui_blocks/screens/flip_card.dart';
+import 'package:ui_blocks/swipeable_card_carousel.dart';
 import 'screens/glassmorphic_profile.dart';
 import 'screens/task_list_screen.dart'; 
 
@@ -96,6 +97,19 @@ _buildCard(
     );
   },
 ),
+
+_buildCard(
+  context,
+  title: 'Swipeable Cards',
+  subtitle: 'Horizontal carousel using PageView',
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => const SwipeableCardCarousel()),
+    );
+  },
+),
+
 
 
         ],
