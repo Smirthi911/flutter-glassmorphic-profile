@@ -1,20 +1,38 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
-class WaterTrackerScreen extends StatelessWidget {
+class WaterTrackerScreen extends StatefulWidget {
   const WaterTrackerScreen({super.key});
 
   @override
+  State<WaterTrackerScreen> createState() => _WaterTrackerScreenState();
+}
+
+class _WaterTrackerScreenState extends State<WaterTrackerScreen> {
+  int glassesDrunk = 0;
+  final int goal = 8;
+
+  void _addGlass() {
+    if (glassesDrunk < goal) {
+      setState(() {
+        glassesDrunk++;
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    double progress = glassesDrunk / goal;
+
     return Scaffold(
       body: Stack(
         children: [
           Positioned.fill(
-  child: Image.asset(
-    'assets/water.jpg',
-    fit: BoxFit.cover,
-  ),
-),
+            child: Image.asset(
+              'assets/water.jpg',
+              fit: BoxFit.cover,
+            ),
+          ),
           Center(
             child: ClipRRect(
               borderRadius: BorderRadius.circular(25),
@@ -42,19 +60,19 @@ class WaterTrackerScreen extends StatelessWidget {
                       ),
                       Column(
                         children: [
-                          const Text(
-                            "4 / 8 glasses",
-                            style: TextStyle(color: Colors.white),
+                          Text(
+                            "$glassesDrunk / $goal glasses",
+                            style: const TextStyle(color: Colors.white),
                           ),
                           const SizedBox(height: 10),
                           SizedBox(
                             height: 100,
                             width: 100,
                             child: CircularProgressIndicator(
-                              value: 0.5,
+                              value: progress,
                               strokeWidth: 8,
                               backgroundColor: Colors.white24,
-                              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                              valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
                             ),
                           ),
                         ],
@@ -68,9 +86,7 @@ class WaterTrackerScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(16),
                           ),
                         ),
-                        onPressed: () {
-                          // TODO: Add logic later
-                        },
+                        onPressed: _addGlass,
                         child: const Text("Add Glass"),
                       )
                     ],
