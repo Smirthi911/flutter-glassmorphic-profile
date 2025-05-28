@@ -11,13 +11,28 @@ class WaterTrackerScreen extends StatefulWidget {
 class _WaterTrackerScreenState extends State<WaterTrackerScreen> {
   int glassesDrunk = 0;
   final int goal = 8;
+  bool showMessage = false;
 
   void _addGlass() {
     if (glassesDrunk < goal) {
       setState(() {
         glassesDrunk++;
+        showMessage = false;
       });
     }
+  }
+
+  void _resetGlasses() {
+    setState(() {
+      glassesDrunk = 0;
+      showMessage = true;
+    });
+
+    Future.delayed(const Duration(seconds: 2), () {
+      setState(() {
+        showMessage = false;
+      });
+    });
   }
 
   @override
@@ -40,7 +55,7 @@ class _WaterTrackerScreenState extends State<WaterTrackerScreen> {
                 filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
                 child: Container(
                   width: 300,
-                  height: 400,
+                  height: 420,
                   decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.15),
                     borderRadius: BorderRadius.circular(25),
@@ -77,18 +92,52 @@ class _WaterTrackerScreenState extends State<WaterTrackerScreen> {
                           ),
                         ],
                       ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white.withOpacity(0.2),
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
+                      Column(
+                        children: [
+                          ElevatedButton(
+                            onPressed: _addGlass,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white.withOpacity(0.2),
+                              foregroundColor: Colors.white,
+                              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                            ),
+                            child: const Text("Add Glass"),
                           ),
-                        ),
-                        onPressed: _addGlass,
-                        child: const Text("Add Glass"),
-                      )
+                          const SizedBox(height: 8),
+                          TextButton(
+                            onPressed: _resetGlasses,
+                            child: const Text(
+                              "Reset",
+                              style: TextStyle(color: Colors.white70),
+                            ),
+                          ),
+                          if (showMessage)
+                            Padding(
+                              padding: const EdgeInsets.only(top: 6.0),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(16),
+                                child: BackdropFilter(
+                                  filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white.withOpacity(0.2),
+                                      borderRadius: BorderRadius.circular(16),
+                                      border: Border.all(color: Colors.white.withOpacity(0.3)),
+                                    ),
+                                    child: const Text(
+                                      "Water intake has been reset.",
+                                      style: TextStyle(color: Colors.white, fontSize: 12),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
