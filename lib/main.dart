@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ui_blocks/screens/custom_buttons.dart';
 import 'package:ui_blocks/screens/expansion_card.dart';
 import 'package:ui_blocks/screens/flip_card.dart';
+import 'package:ui_blocks/screens/mood_tracker_screen.dart';
 import 'package:ui_blocks/screens/neumorphic_card.dart';
 import 'package:ui_blocks/screens/water_tracker_screen.dart';
 import 'package:ui_blocks/swipeable_card_carousel.dart';
@@ -132,6 +133,17 @@ _buildCard(
     Navigator.push(
       context,
       MaterialPageRoute(builder: (_) => const WaterTrackerScreen()),
+    );
+  },
+),
+_buildCard(
+  context,
+  title: 'Mood Tracker',
+  subtitle: 'Track your daily mood with emojis',
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => const MoodTrackerScreen()),
     );
   },
 ),
