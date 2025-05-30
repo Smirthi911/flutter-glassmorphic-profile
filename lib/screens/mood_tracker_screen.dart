@@ -73,7 +73,7 @@ class _MoodTrackerScreenState extends State<MoodTrackerScreen>
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: isSelected
-    ? Colors.deepPurple.withAlpha(51)  // 0.2 opacity => alpha 51
+    ? Colors.deepPurple.withAlpha(51)  
     : Colors.grey.shade200,
                 shape: BoxShape.circle,
                 border: isSelected
