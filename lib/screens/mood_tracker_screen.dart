@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:ui_blocks/screens/mood_history_screen.dart';
+
 
 class MoodTrackerScreen extends StatefulWidget {
   const MoodTrackerScreen({super.key});
@@ -73,8 +75,8 @@ class _MoodTrackerScreenState extends State<MoodTrackerScreen>
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: isSelected
-    ? Colors.deepPurple.withAlpha(51)  
-    : Colors.grey.shade200,
+                    ? Colors.deepPurple.withAlpha(51)
+                    : Colors.grey.shade200,
                 shape: BoxShape.circle,
                 border: isSelected
                     ? Border.all(color: Colors.deepPurpleAccent, width: 2)
@@ -112,9 +114,11 @@ class _MoodTrackerScreenState extends State<MoodTrackerScreen>
               height: 120,
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Colors.white.withAlpha(38), 
+                color: Colors.white.withAlpha(38),
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: Colors.deepPurpleAccent.withAlpha(102)),
+                border: Border.all(
+                  color: Colors.deepPurpleAccent.withAlpha(102),
+                ),
               ),
               child: Center(
                 child: Text(
@@ -169,7 +173,28 @@ class _MoodTrackerScreenState extends State<MoodTrackerScreen>
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                  )
+                  ),
+                  const SizedBox(height: 16),
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const MoodHistoryScreen(),
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.history),
+                    label: const Text('View Mood History'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.deepPurple.shade200,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
