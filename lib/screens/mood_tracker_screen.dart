@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:ui_blocks/models/mood_entry.dart';
 import 'package:ui_blocks/screens/mood_history_screen.dart';
+import 'package:ui_blocks/services/mood_storage.dart';
 
 
 class MoodTrackerScreen extends StatefulWidget {
@@ -46,8 +48,12 @@ class _MoodTrackerScreenState extends State<MoodTrackerScreen>
     _controller.forward(from: 0.0);
   }
 
-  void saveMood() {
+  Future<void> saveMood() async {
     if (selectedMood.isNotEmpty) {
+      final today = DateTime.now();
+      final entry = MoodEntry(date: today, moodEmoji: selectedMood);
+      await MoodStorage.saveMoodEntry(entry);
+
       setState(() => showToast = true);
       Timer(const Duration(seconds: 2), () {
         setState(() => showToast = false);
